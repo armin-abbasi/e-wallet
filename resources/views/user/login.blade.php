@@ -13,31 +13,38 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+                <form action="{{ route('sign-in') }}" method="post">
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Email">
+                        <input type="text" name="email" class="form-control" placeholder="Email">
 
                     </div>
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="row align-items-center remember">
-                        <input type="checkbox">&nbsp;Remember Me
+                        <input name="remember" type="checkbox">&nbsp;Remember Me
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Login" class="btn float-right btn-info">
                     </div>
+                    @csrf
                 </form>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">
-                    Don't have an account?<a href="#">&nbsp;Sign Up</a>
+                    Don't have an account?<a href="{{ route('register') }}">&nbsp;Sign Up</a>
                 </div>
             </div>
         </div>
