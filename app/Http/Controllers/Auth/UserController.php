@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +41,7 @@ class UserController extends Controller
             return redirect()->intended(route('main'));
         }
 
-        return redirect()->route('login');
+        return redirect()->route('login')->withErrors(['password' => 'Invalid credentials.']);
     }
 
     /**
@@ -56,12 +58,14 @@ class UserController extends Controller
      */
     public function signUp(RegisterUserRequest $request)
     {
-        User::query()->create($request->only([
+        $user = User::query()->create($request->only([
             'name',
             'email',
             'password',
         ]));
 
-        return redirect()->route('main');
+        event(new Registered($user));
+
+        return redirect()->route('login');
     }
 }
