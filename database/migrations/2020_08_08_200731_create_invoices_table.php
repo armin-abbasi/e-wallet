@@ -27,6 +27,7 @@ class CreateInvoicesTable extends Migration
                 ->onDelete('cascade');
             $table->unsignedInteger('amount');
             $table->string('type');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
