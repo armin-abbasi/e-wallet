@@ -113,15 +113,6 @@ class WalletService
     }
 
     /**
-     * @param int $walletId
-     * @return array
-     */
-    /*public function getWalletInvoices(int $walletId): array
-    {
-        return $this->invoiceRepo->getAll($walletId);
-    }*/
-
-    /**
      * @param int $userId
      * @param int $walletId
      * @param array $invoiceData
