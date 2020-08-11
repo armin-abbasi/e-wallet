@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect()->route('main');
 });
 
@@ -29,7 +29,15 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/', 'DashboardController@index')->name('main');
+    Route::get('/', 'WalletController@index')->name('main');
+    Route::get('new-wallet', 'WalletController@showCreateWallet')->name('create.wallet');
+    Route::post('wallet', 'WalletController@store')->name('store.wallet');
+    Route::get('wallet/{wallet_id}', 'WalletController@show')->name('show.wallet');
+    Route::get('wallet/{wallet_id}/update', 'WalletController@showUpdate')->name('show.update.wallet');
+    Route::post('wallet/{wallet_id}/update', 'WalletController@update')->name('update.wallet');
+    Route::get('wallet/{wallet_id}/delete', 'WalletController@destroy')->name('delete.wallet');
+    Route::get('invoice/{invoice_id}/delete', 'WalletController@destroyInvoice')->name('delete.invoice');
+    Route::get('wallet/{wallet_id}/new-invoice', 'WalletController@showCreateInvoice')->name('create.invoice');
+    Route::post('wallet/{wallet_id}/new-invoice', 'WalletController@updateBalance')->name('store.invoice');
 });
 
-//Auth::routes(['verify' => true]);
