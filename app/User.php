@@ -54,4 +54,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Wallet::class);
     }
+
+    /**
+     * User link social provider
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany relation
+     */
+    public function linkedSocialAccounts()
+    {
+        return $this->hasMany(LinkedSocialAccount::class);
+    }
 }
