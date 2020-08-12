@@ -8,8 +8,10 @@
             <div class="card-header">
                 <h3 class="float-left">Sign In</h3>
                 <div class="d-flex justify-content-end social_icon float-right">
-                    <span><i class="fab fa-facebook-square"></i></span>
-                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <a href="{{ route('socialite.login', ['provider' => 'facebook']) }}">
+                        <span><i class="fab fa-facebook-square"></i></span></a>
+                    <a href="{{ route('socialite.login', ['provider' => 'google']) }}">
+                        <span><i class="fab fa-google-plus-square"></i></span></a>
                 </div>
             </div>
             <div class="card-body">

@@ -26,6 +26,12 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('resend', 'VerificationController@resend')->name('verification.resend');
     Route::get('verify', 'VerificationController@show')->name('verification.notice');
     Route::get('verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
+
+    // Socialite login routes.
+    Route::get('login/{provider}', 'SocialiteController@login')
+        ->where('provider', 'google|facebook')->name('socialite.login');
+    Route::get('login/{provider}/callback', 'SocialiteController@handleCallback')
+        ->where('provider', 'google|facebook');
 });
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'verified']], function () {
